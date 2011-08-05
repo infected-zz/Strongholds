@@ -36,8 +36,9 @@ public class Strongholds extends JavaPlugin {
 		dbUser = sm.dbUser;
 		dbPass = sm.dbPass;
 		dbDatabase = sm.dbDatabase;
-		this.cfg = sm.cfg;
+		this.cfg = sm.cfg; //We can pull our cfg from sm's cfg.
 		
+		System.out.println(pref + "Connecting to " +dbHost+ "@" + dbHost);
 		sqlCore = new mysqlCore(this.log, this.pref, this.dbHost, this.dbDatabase, this.dbUser, this.dbPass); // Make an instance of a sql core for use
 		System.out.println(pref + "Initializing MySQL core for connections");
 		sqlCore.initialize(); //We initialize to begin connections
