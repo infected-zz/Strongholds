@@ -2,5 +2,9 @@ name: StrongHolds
 main: me.desmin88.strongholds.Strongholds
 version: 1.00
 authors: [desmin88]
+commands:
+    sh:
+        description: Allows player to use SH commands
+        usage: /sh
 
 
