@@ -8,6 +8,7 @@ import me.desmin88.strongholds.commands.SHCommands;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.config.Configuration;
 
 import com.alta189.sqlLibrary.MySQL.mysqlCore;
 
@@ -20,7 +21,8 @@ public class Strongholds extends JavaPlugin {
 	private String dbPass = null;
 	private String dbDatabase = null;
 	private PluginDescriptionFile pdf;
-	
+	private static SettingsManager sm;
+	private Configuration cfg;
 	@Override
 	public void onDisable() {
 		System.out.println("[" + pdf.getName() + "]"  + " by " + pdf.getAuthors().get(0) + " version " + pdf.getVersion() + " disabled.");
@@ -29,8 +31,12 @@ public class Strongholds extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		pdf = this.getDescription();
-		
-		//TODO code for getting config.yml settings
+        sm = new SettingsManager(this); //Lets pull all of our values..
+		dbHost = sm.dbHost;
+		dbUser = sm.dbUser;
+		dbPass = sm.dbPass;
+		dbDatabase = sm.dbDatabase;
+		this.cfg = sm.cfg;
 		
 		sqlCore = new mysqlCore(this.log, this.pref, this.dbHost, this.dbDatabase, this.dbUser, this.dbPass); // Make an instance of a sql core for use
 		System.out.println(pref + "Initializing MySQL core for connections");

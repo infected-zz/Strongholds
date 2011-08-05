@@ -8,12 +8,12 @@ import org.bukkit.util.config.Configuration;
 
 public class SettingsManager {
 	private Strongholds plugin;
-	private String dbHost = null;
-	private String dbUser = null;
-	private String dbPass = null;
-	private String dbDatabase = null;
+	protected String dbHost = null;
+	protected String dbUser = null;
+	protected String dbPass = null;
+	protected String dbDatabase = null;
 	private File cfgfile = null;
-	private Configuration cfg = null;
+	protected Configuration cfg = null;
 	protected SettingsManager(Strongholds instance)  {
 		this.plugin = instance;
 		this.cfgfile = new File(plugin.getDataFolder(), "config.yml");
@@ -33,6 +33,7 @@ public class SettingsManager {
 			cfg.setProperty("MySQL.dbDatabase", "");
 			System.out.println(Strongholds.pref + "Blank config.yml created, needs to be configured, shutting down");
 			plugin.getServer().getPluginManager().disablePlugin(plugin);
+			return;
 		}
 		else {
 			//The yml exists!
@@ -40,7 +41,11 @@ public class SettingsManager {
 			dbUser = cfg.getString("MySQL.dbUser");
 			dbPass = cfg.getString("MySQL.dPass");
 			dbDatabase = cfg.getString("MySQL.dbDatabase");
-			
+			if(dbHost == null || dbUser == null || dbPass == null || dbDatabase == null) {
+				System.out.println(Strongholds.pref + "Required config values not set, shutting down");
+				plugin.getServer().getPluginManager().disablePlugin(plugin); 
+				return;
+			}
 			
 		}
 	
