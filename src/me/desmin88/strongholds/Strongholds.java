@@ -3,6 +3,8 @@ package me.desmin88.strongholds;
 import java.net.MalformedURLException;
 import java.util.logging.Logger;
 
+import me.desmin88.strongholds.commands.SHCommands;
+
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -51,7 +53,7 @@ public class Strongholds extends JavaPlugin {
 			e.printStackTrace();
 		}
 		PluginManager pm = this.getServer().getPluginManager();
-	
+		getCommand("sh").setExecutor(new SHCommands());
 		System.out.println("[" + pdf.getName() + "]"  + " by " + pdf.getAuthors().get(0) + " version " + pdf.getVersion() + " enabled.");
 	
 	}
